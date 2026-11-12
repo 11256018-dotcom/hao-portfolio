@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f10">
+  <title>AIM LAB // 木造靶場 — HAO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Noto+Sans+TC:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fps.css">
+</head>
+<body>
+  <div id="stage">
+    <canvas id="rangeCanvas" aria-label="3D 第一人稱木造靶場"></canvas>
+    <div class="fx-vignette" aria-hidden="true"></div>
+    <div class="fx-scanlines" aria-hidden="true"></div>
+    <div id="hitFlash" aria-hidden="true"></div>
+
+    <!-- ===== HUD ===== -->
+    <div id="hud" class="hud is-hidden" aria-hidden="true">
+      <div class="hud-top">
+        <div class="mode-chip">
+          <span id="hudMode">QUALIFICATION</span>
+          <small id="hudGoal">TARGET 100 // REMAIN 100</small>
+        </div>
+        <div class="hud-id">
+          <span class="hud-id-main">AIM LAB</span>
+          <span class="hud-id-sub">RANGE 07 · LIVE FIRE</span>
+        </div>
+      </div>
+
+      <div id="crosshair" class="crosshair" aria-hidden="true">
+        <span class="ch ch-t"></span>
+        <span class="ch ch-r"></span>
+        <span class="ch ch-b"></span>
+        <span class="ch ch-l"></span>
+        <span class="ch-dot"></span>
+      </div>
+      <div id="hitmarker" class="hitmarker" aria-hidden="true">
+        <span class="hm hm-tl"></span>
+        <span class="hm hm-tr"></span>
+        <span class="hm hm-bl"></span>
+        <span class="hm hm-br"></span>
+      </div>
+      <div id="feedback" class="feedback" aria-hidden="true"></div>
+
+      <div class="hud-bottom">
+        <div class="controls">
+          <span><kbd>LMB</kbd> 單發射擊</span>
+          <span><kbd>A</kbd><kbd>D</kbd> 橫移</span>
+          <span><kbd>ESC</kbd> 暫停</span>
+        </div>
+        <div class="weapon">
+          <div class="weapon-row">
+            <span class="weapon-name">RANGE-7</span>
+            <span class="weapon-mode">SEMI-AUTO</span>
+          </div>
+          <div class="ammo-row">
+            <span class="ammo">∞</span>
+            <span class="ammo-label">AMMO<br><i>UNLIMITED</i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MENU ===== -->
+    <section id="menuOverlay" class="overlay" aria-label="AIM LAB 選單">
+      <div class="sheet menu-sheet">
+        <a class="back-link" href="index.html#arcade">← 返回作品集</a>
+        <div class="menu-head">
+          <div class="menu-title-block">
+            <p class="kicker">HAO // ARCADE 03</p>
+            <h1 class="menu-title"><span>AIM</span><em>LAB</em></h1>
+            <p class="menu-sub">WOODEN RANGE <i>/</i> SEMI-AUTO PROTOCOL</p>
+          </div>
+          <div class="menu-side">
+            <p class="side-label">TRAINING FACILITY</p>
+            <p class="side-copy">特戰風格木造靶場<br>第一人稱精準度訓練</p>
+            <p class="best-time">BEST 100 <b id="bestTime">--:--.--</b></p>
+          </div>
+        </div>
+
+        <div class="menu-body">
+          <div class="mode-list">
+            <p class="section-label">SELECT DRILL // 選擇模式</p>
+            <button class="mode-card primary" id="startQual" type="button">
+              <span class="mode-no">01</span>
+              <span class="mode-info">
+                <span class="mode-name">開始<span class="mode-bracket">（消滅 100）</span></span>
+                <span class="mode-desc">計時挑戰 · 完成 100 擊殺後結算總時間與爆頭率</span>
+              </span>
+              <span class="mode-go" aria-hidden="true">→</span>
+            </button>
+            <button class="mode-card" id="startPractice" type="button">
+              <span class="mode-no">02</span>
+              <span class="mode-info">
+                <span class="mode-name">練習模式</span>
+                <span class="mode-desc">無限時間與目標 · 自由熱身、調整手感</span>
+              </span>
+              <span class="mode-go" aria-hidden="true">→</span>
+            </button>
+            <p id="rangeStatus" class="range-status" role="status"></p>
+          </div>
+
+          <div class="briefing">
+            <p class="section-label">RANGE BRIEF // 靶場規則</p>
+            <div class="brief-grid">
+              <div class="brief-item">
+                <span class="brief-no">01</span>
+                <strong>HEADSHOT</strong>
+                <p>命中頭部，一發擊殺。<br>清脆聲響與金色回饋。</p>
+              </div>
+              <div class="brief-item">
+                <span class="brief-no">02</span>
+                <strong>BODY / 3 HITS</strong>
+                <p>身體需三發命中。<br>胸口燈號顯示剩餘耐久。</p>
+              </div>
+              <div class="brief-item">
+                <span class="brief-no">03</span>
+                <strong>SEMI-AUTO ONLY</strong>
+                <p>一次點擊，只發射一發。<br>按住左鍵不會連射。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-foot">
+          <span><kbd>滑鼠</kbd> 轉動視角</span>
+          <span><kbd>左鍵</kbd> 單發射擊</span>
+          <span><kbd>A</kbd><kbd>D</kbd> 左右橫移</span>
+          <span class="menu-foot-note">建議使用桌機 · 點擊模式後鎖定滑鼠</span>
+        </div>
+        <p id="touchWarning" class="touch-warning" hidden>此訓練需要滑鼠與鍵盤，請使用桌機開啟。</p>
+      </div>
+    </section>
+
+    <!-- ===== PAUSE ===== -->
+    <section id="pauseOverlay" class="overlay is-hidden" aria-label="遊戲暫停">
+      <div class="sheet small-sheet">
+        <p class="kicker">SYSTEM // HOLD</p>
+        <h2 class="sheet-title">PAUSED</h2>
+        <p class="sheet-sub">訓練已暫停。繼續後計時會從暫停處接續。</p>
+        <div class="pause-stats">
+          <div><span>TIME</span><b id="pauseTime">00:00.0</b></div>
+          <div><span>KILLS</span><b id="pauseKills">000</b></div>
+          <div><span>HEADSHOT</span><b id="pauseHs">0%</b></div>
+        </div>
+        <div class="sheet-actions">
+          <button class="btn-line primary" id="resumeBtn" type="button">繼續訓練 <span>→</span></button>
+          <button class="btn-line" id="restartBtn" type="button">重新開始</button>
+          <button class="btn-line" id="quitBtn" type="button">返回模式選單</button>
+        </div>
+        <p class="sheet-hint">按 ESC 亦可暫停；再次進入需重新鎖定滑鼠。</p>
+      </div>
+    </section>
+
+    <!-- ===== RESULTS ===== -->
+    <section id="resultsOverlay" class="overlay is-hidden" aria-label="挑戰結果">
+      <div class="sheet result-sheet">
+        <p class="kicker">QUALIFICATION // COMPLETE</p>
+        <h2 class="sheet-title">COURSE<br><em>CLEAR.</em></h2>
+        <p class="sheet-sub">100 隻機器人已清除。以下是本次成績。</p>
+        <div class="result-time">
+          <span>總花費時間</span>
+          <b id="resultTime">00:00.00</b>
+        </div>
+        <div class="result-grid">
+          <div><span>擊殺數</span><b>100</b><small>TARGETS</small></div>
+          <div><span>爆頭率</span><b id="resultHs">0%</b><small>HEADSHOT RATE</small></div>
+          <div><span>命中率</span><b id="resultAcc">0%</b><small>ACCURACY</small></div>
+          <div><span>發射數</span><b id="resultShots">0</b><small>SHOTS FIRED</small></div>
+        </div>
+        <p id="newBest" class="new-best" hidden>NEW PERSONAL BEST // 新紀錄</p>
+        <div class="sheet-actions">
+          <button class="btn-line primary" id="retryBtn" type="button">再次挑戰 <span>→</span></button>
+          <button class="btn-line" id="resultMenuBtn" type="button">返回模式選單</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WEBGL ERROR ===== -->
+    <section id="errorOverlay" class="overlay is-hidden" aria-label="無法啟動">
+      <div class="sheet small-sheet">
+        <p class="kicker">SYSTEM // FAILURE</p>
+        <h2 class="sheet-title">NO<br><em>SIGNAL.</em></h2>
+        <p class="sheet-sub" id="errorText">WebGL 無法啟動，請確認瀏覽器支援或改用 Chrome / Edge。</p>
+        <div class="sheet-actions">
+          <a class="btn-line primary" href="index.html#arcade">返回作品集 <span>→</span></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="vendor/three.min.js"></script>
+  <script src="fps.js"></script>
+</body>
+</html>

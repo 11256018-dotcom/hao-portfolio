@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAO — 創意開發者 / 個人作品集</title>
+  <meta name="description" content="皓（HAO）的個人作品集。霓虹賽博龐克風格的創意開發者網站，收錄精選專案、技能與聯絡方式。">
+  <meta name="theme-color" content="#04010a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2304010a'/%3E%3Ctext x='50' y='70' font-size='56' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%2300f0ff'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <noscript><style>.reveal{opacity:1!important}</style></noscript>
+</head>
+<body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="side-text" aria-hidden="true">CREATIVE · DEVELOPER · TPE</div>
+
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="logo" aria-label="回到頂部">H<span>//</span>O</a>
+      <nav class="nav-links" id="navLinks" aria-label="主要導覽">
+        <a href="#about" data-nav="about">關於</a>
+        <a href="#skills" data-nav="skills">技能</a>
+        <a href="#work" data-nav="work">作品</a>
+        <a href="#arcade" data-nav="arcade">遊戲</a>
+        <a href="#contact" data-nav="contact">聯絡</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="開啟選單" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <div class="hero-orb orb-1" aria-hidden="true"></div>
+      <div class="hero-orb orb-2" aria-hidden="true"></div>
+      <div class="grid-floor" aria-hidden="true"></div>
+
+      <div class="container hero-inner">
+        <p class="badge reveal">SYSTEM ONLINE — AVAILABLE FOR WORK</p>
+        <h1 class="hero-title glitch reveal" data-text="HAO" style="--d:.08s">HAO</h1>
+        <p class="hero-sub reveal" style="--d:.16s">
+          <span class="prompt">&gt;</span>
+          <span id="typed">創意開發者</span><span class="type-cursor" aria-hidden="true">▌</span>
+        </p>
+        <p class="hero-desc reveal" style="--d:.24s">在程式碼與霓虹之間，打造讓人記住的數位體驗。</p>
+        <div class="hero-cta reveal" style="--d:.32s">
+          <a class="btn" href="#work">查看作品 <span aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="#contact">聯絡我</a>
+        </div>
+
+        <div class="mini-game reveal" style="--d:.4s" id="gamePanel">
+          <div class="game-bar">
+            <span class="game-name"><i class="game-dot"></i> MINI GAME // NEON RUNNER</span>
+            <span class="game-hi">HI <b id="gameHi">0000</b></span>
+          </div>
+          <div class="game-screen">
+            <canvas id="gameCanvas" width="960" height="300" tabindex="0" aria-label="霓虹跑酷小遊戲：按空白鍵、上方向鍵或點擊畫面跳躍，避開霓虹障礙物">你的瀏覽器不支援 Canvas，無法遊玩小遊戲。</canvas>
+            <div class="game-overlay" id="gameOverlay" aria-hidden="true">
+              <p class="game-msg" id="gameMsg">PRESS SPACE / TAP TO RUN</p>
+              <p class="game-sub" id="gameSub">避開霓虹障礙，跑得越遠分數越高</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="scroll-hint" href="#about" aria-label="向下捲動">
+        <span>SCROLL</span><i></i>
+      </a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee">
+        <div class="marquee-track">
+          <span class="marquee-seg">CREATIVE DEVELOPER ✦ WEBGL ENTHUSIAST ✦ UI / UX ✦ PROBLEM SOLVER ✦ CAFFEINE POWERED ✦</span>
+          <span class="marquee-seg">CREATIVE DEVELOPER ✦ WEBGL ENTHUSIAST ✦ UI / UX ✦ PROBLEM SOLVER ✦ CAFFEINE POWERED ✦</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <p class="eyebrow reveal">01 // ABOUT ME</p>
+        <h2 class="section-title reveal" style="--d:.06s">關於<span class="gradient-text">我</span></h2>
+
+        <div class="about-grid">
+          <div class="terminal reveal" aria-hidden="true">
+            <div class="term-bar">
+              <span class="tdot red"></span><span class="tdot yellow"></span><span class="tdot green"></span>
+              <span class="term-title">hao@portfolio: ~</span>
+            </div>
+            <div class="term-body">
+              <p><span class="tprompt">$</span> whoami</p>
+              <p class="tout">皓 / HAO — Creative Developer</p>
+              <p><span class="tprompt">$</span> location</p>
+              <p class="tout">Taipei, Taiwan · UTC+8</p>
+              <p><span class="tprompt">$</span> status</p>
+              <p class="tout"><span class="status-dot"></span> 開放合作中</p>
+              <p><span class="tprompt">$</span> stack</p>
+              <p class="tout">TypeScript · React · WebGL · Node.js</p>
+              <p><span class="tprompt">$</span> coffee --level</p>
+              <p class="tout"><span class="coffee-bar">██████████</span> 100%</p>
+              <p class="term-line"><span class="tprompt">$</span> <span class="term-blink">▌</span></p>
+            </div>
+          </div>
+
+          <div class="about-copy reveal" style="--d:.1s">
+            <p class="lead">嗨，我是皓。</p>
+            <p>一位把科技與美感揉在一起的創意開發者。白天寫前端，晚上玩 WebGL，偶爾在咖啡因與程式碼之間尋找靈感。</p>
+            <p>我相信好的網站不只是「能用」，更要讓人一眼記住。於是我把互動、動態與視覺敘事都塞進每一行程式裡。</p>
+            <div class="stats">
+              <div class="stat"><span class="stat-num" data-count="3" data-suffix="+">0</span><span class="stat-label">年開發經驗</span></div>
+              <div class="stat"><span class="stat-num" data-count="24">0</span><span class="stat-label">完成專案</span></div>
+              <div class="stat"><span class="stat-num" data-count="12">0</span><span class="stat-label">開源貢獻</span></div>
+            </div>
+            <p class="about-note">// 相信好的網站，會讓人一眼記住。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="container">
+        <p class="eyebrow reveal">02 // SKILLS</p>
+        <h2 class="section-title reveal" style="--d:.06s">我的<span class="gradient-text">技能</span></h2>
+
+        <div class="skills-grid">
+          <div class="skill reveal" style="--w:95%">
+            <div class="skill-head"><span class="skill-name">HTML / CSS</span><span class="skill-pct">95%</span></div>
+            <div class="bar"><span></span></div>
+            <p class="skill-note">語意化 · RWD · 動畫</p>
+          </div>
+          <div class="skill reveal" style="--w:90%;--d:.06s">
+            <div class="skill-head"><span class="skill-name">JavaScript / TS</span><span class="skill-pct">90%</span></div>
+            <div class="bar"><span></span></div>
+            <p class="skill-note">ES2024 · 型別安全 · 效能</p>
+          </div>
+          <div class="skill reveal" style="--w:88%;--d:.12s">
+            <div class="skill-head"><span class="skill-name">React / Next.js</span><span class="skill-pct">88%</span></div>
+            <div class="bar"><span></span></div>
+            <p class="skill-note">SSR · Hooks · 元件架構</p>
+          </div>
+          <div class="skill reveal" style="--w:78%;--d:.18s">
+            <div class="skill-head"><span class="skill-name">WebGL / Three.js</span><span class="skill-pct">78%</span></div>
+            <div class="bar"><span></span></div>
+            <p class="skill-note">Shader · 3D 場景 · 互動</p>
+          </div>
+          <div class="skill reveal" style="--w:82%;--d:.24s">
+            <div class="skill-head"><span class="skill-name">UI / UX Design</span><span class="skill-pct">82%</span></div>
+            <div class="bar"><span></span></div>
+            <p class="skill-note">Figma · 設計系統 · 原型</p>
+          </div>
+          <div class="skill reveal" style="--w:72%;--d:.3s">
+            <div class="skill-head"><span class="skill-name">Node.js</span><span class="skill-pct">72%</span></div>
+            <div class="bar"><span></span></div>
+            <p class="skill-note">API · 資料庫 · 部署</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="work-head">
+          <div>
+            <p class="eyebrow reveal">03 // SELECTED WORK</p>
+            <h2 class="section-title reveal" style="--d:.06s">精選<span class="gradient-text">作品</span></h2>
+          </div>
+          <p class="work-note reveal" style="--d:.12s">2024 — 2026 / 04 PROJECTS</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project reveal" style="--d:.05s">
+            <div class="project-art art-1" aria-hidden="true">
+              <span class="art-index">01 / WEB APP</span>
+              <span class="art-glyph">◈</span>
+              <span class="art-shine"></span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>2026</span><i class="meta-dot"></i><span>REACT · D3.JS</span></div>
+              <h3>NEON DASH</h3>
+              <p>即時數據儀表板，把枯燥的數字變成流動的霓虹。</p>
+              <ul class="tags"><li>React</li><li>D3.js</li><li>WebSocket</li></ul>
+              <a class="project-link" href="#contact">查看專案 <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="project reveal" style="--d:.12s">
+            <div class="project-art art-2" aria-hidden="true">
+              <span class="art-index">02 / AUDIO</span>
+              <span class="art-glyph">♪</span>
+              <span class="art-shine"></span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>2025</span><i class="meta-dot"></i><span>WEB AUDIO · CANVAS</span></div>
+              <h3>AURORA</h3>
+              <p>音樂視覺化播放器，讓每一拍都長出極光。</p>
+              <ul class="tags"><li>Web Audio</li><li>Canvas</li><li>GSAP</li></ul>
+              <a class="project-link" href="#contact">查看專案 <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="project reveal" style="--d:.05s">
+            <div class="project-art art-3" aria-hidden="true">
+              <span class="art-index">03 / E-COMMERCE</span>
+              <span class="art-glyph">▦</span>
+              <span class="art-shine"></span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>2025</span><i class="meta-dot"></i><span>NEXT.JS · STRIPE</span></div>
+              <h3>GLITCH.STORE</h3>
+              <p>潮流電商平台，用故障美學重新定義購物體驗。</p>
+              <ul class="tags"><li>Next.js</li><li>Stripe</li><li>Tailwind</li></ul>
+              <a class="project-link" href="#contact">查看專案 <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+
+          <article class="project reveal" style="--d:.12s">
+            <div class="project-art art-4" aria-hidden="true">
+              <span class="art-index">04 / WEBGL</span>
+              <span class="art-glyph">▲</span>
+              <span class="art-shine"></span>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>2024</span><i class="meta-dot"></i><span>THREE.JS · GLSL</span></div>
+              <h3>VOID LAB</h3>
+              <p>3D 互動實驗室，探索瀏覽器裡的下一個維度。</p>
+              <ul class="tags"><li>Three.js</li><li>GLSL</li><li>WebXR</li></ul>
+              <a class="project-link" href="#contact">查看專案 <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ARCADE ============ -->
+    <section class="section arcade" id="arcade">
+      <div class="container">
+        <p class="eyebrow reveal">04 // ARCADE</p>
+        <div class="work-head arcade-head">
+          <h2 class="section-title reveal" style="--d:.06s">霓虹<span class="gradient-text">遊樂場</span></h2>
+          <p class="work-note reveal" style="--d:.12s">02 GAMES / PLAYABLE</p>
+        </div>
+        <p class="arcade-desc reveal" style="--d:.16s">封面上的 NEON RUNNER 是暖身，這裡是火力全開的空戰。駕駛戰機、殲滅霓虹艦隊，看看你能撐到第幾波。</p>
+
+        <div class="mini-game shooter-game reveal" id="shooterPanel" style="--d:.2s">
+          <div class="game-bar">
+            <span class="game-name"><i class="game-dot"></i> NEON STRIKE // SPACE SHOOTER</span>
+            <span class="game-hi">HI <b id="shooterHi">0000</b></span>
+          </div>
+          <div class="game-screen">
+            <canvas id="shooterCanvas" width="1720" height="800" tabindex="0" aria-label="霓虹射擊小遊戲：左右移動戰機，發射雷射擊落敵人，撐過一波又一波">你的瀏覽器不支援 Canvas，無法遊玩小遊戲。</canvas>
+            <div class="game-overlay" id="shooterOverlay">
+              <p class="game-msg" id="shooterMsg">PRESS SPACE / TAP TO START</p>
+              <p class="game-sub" id="shooterSub">← → / A D 移動 · SPACE 開火 · 拖曳移動自動開火</p>
+            </div>
+          </div>
+          <div class="game-foot">
+            <span class="game-keys"><kbd>←</kbd><kbd>→</kbd> 移動 <span class="sep">/</span> <kbd>SPACE</kbd> 開火 <span class="sep">/</span> 手機拖曳</span>
+            <span class="game-lives">LIVES <b id="shooterLives"></b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <p class="eyebrow reveal">05 // CONTACT</p>
+        <h2 class="contact-title reveal" style="--d:.06s">LET'S<br><span class="gradient-text">BUILD SOMETHING</span><br>COOL.</h2>
+        <p class="contact-desc reveal" style="--d:.12s">有有趣的專案、合作邀約，或只是想聊聊？寫封信給我，讓我們一起做點酷東西。</p>
+        <div class="reveal" style="--d:.18s">
+          <a class="btn contact-mail" href="mailto:hello@hao.dev">hello@hao.dev <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="socials reveal" style="--d:.24s">
+          <a class="social" href="https://github.com" target="_blank" rel="noopener noreferrer">GITHUB <span aria-hidden="true">↗</span></a>
+          <a class="social" href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM <span aria-hidden="true">↗</span></a>
+          <a class="social" href="https://x.com" target="_blank" rel="noopener noreferrer">X / TWITTER <span aria-hidden="true">↗</span></a>
+          <a class="social" href="mailto:hello@hao.dev">EMAIL <span aria-hidden="true">✉</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> HAO. ALL RIGHTS RESERVED.</p>
+      <p class="footer-time"><span class="status-dot"></span> TPE <span id="clock">--:--:--</span></p>
+      <a href="#top" class="top-link">BACK TO TOP ↑</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="shooter.js"></script>
+</body>
+</html>
